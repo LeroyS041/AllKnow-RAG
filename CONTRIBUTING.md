@@ -1,6 +1,6 @@
-# Contributing to **OmniKnow RAG Agent**
+# Contributing to **AllKnow RAG Agent**
 
-Thank you for your interest in contributing to **OmniKnow**! This document provides guidelines and instructions for contributing to the project.
+Thank you for your interest in contributing to **AllKnow**! This document provides guidelines and instructions for contributing to the project.
 
 ---
 
@@ -45,11 +45,11 @@ Violations may result in being banned from contributing.
 ```bash
 # 1. Fork the repository on GitHub
 # 2. Clone your fork
-git clone https://github.com/Sol-so-special/OmniKnow-RAG-Agent
-cd OmniKnow-RAG-Agent
+git clone https://github.com/LeroyS041/Custom-RAG
+cd Custom-RAG
 
 # 3. Add upstream remote
-git remote add upstream https://github.com/Sol-so-special/OmniKnow-RAG-Agent
+git remote add upstream https://github.com/LeroyS041/Custom-RAG
 ```
 
 ### Setup Development Environment
@@ -305,7 +305,7 @@ Describe how you tested your changes
 Understanding the project structure helps you contribute effectively:
 
 ```
-Omniknow-RAG-Agent/
+Custom-RAG/
 ├── .env                          # Local environment variables
 ├── .env.cloud                    # AWS cloud environment template
 ├── .env.gcp                      # GCP cloud environment template
@@ -544,7 +544,7 @@ Contributors will be recognized in:
 - This section
 - GitHub contributors list
 
-Thank you for contributing to OmniKnow! 🎉
+Thank you for contributing to AllKnow! 🎉
 
 ---
 

@@ -17,8 +17,8 @@ services:
       - LOG_LEVEL=INFO
       - PYTHONPATH=/app
     networks:
-      - omniknow
+      - AllKnow
 
 networks:
-  omniknow:
+  AllKnow:
     driver: bridge

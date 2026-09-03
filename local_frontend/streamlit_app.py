@@ -9,7 +9,7 @@ from assets.styling import apply_styling, render_user_message, render_ai_message
 
 # Page config
 st.set_page_config(
-    page_title="OmniKnow RAG Agent",
+    page_title="AllKnow RAG Agent",
     page_icon="📚",
     layout="wide"
 )
@@ -53,7 +53,7 @@ if "processed_urls" not in st.session_state:
     st.session_state.processed_urls = set()
 
 # Main UI
-st.title("📚🔎🌍 OmniKnow ✨ RAG 🤖 Agent")
+st.title("📚🔎🌍 AllKnow ✨ RAG 🤖 Agent")
 st.markdown("<br>", unsafe_allow_html=True)
 
 st.subheader("👋 Hi! I'm your RAG-powered AI agent. Ask me about your PDFs, web pages, or the latest from Google! 😊")

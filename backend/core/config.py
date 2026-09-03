@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     
     # Vector Store
     vector_store_type: Literal["chroma", "pinecone"] = "chroma"
-    pinecone_index_name: str = "omniknow"
+    pinecone_index_name: str = "AllKnow"
     pinecone_cloud: str | None = "aws"
     pinecone_region: str | None = "us-east-1"
     chroma_persist_directory: str = "./chroma_db"

@@ -88,7 +88,7 @@ def test_agent_chat():
 def main():
     """Run all tests."""
     print("=" * 50)
-    print("OmniKnow API Test Suite")
+    print("AllKnow API Test Suite")
     print("=" * 50)
     
     tests = [

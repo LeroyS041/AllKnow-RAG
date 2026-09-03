@@ -18,7 +18,7 @@ output_dir.mkdir(parents=True, exist_ok=True)
 pdf_path = output_dir / "test_document.pdf"
 
 c = canvas.Canvas(str(pdf_path), pagesize=letter)
-c.drawString(100, 750, "Test Document for OmniKnow RAG Agent")
+c.drawString(100, 750, "Test Document for AllKnow RAG Agent")
 c.drawString(100, 730, "This is a test PDF for automated testing.")
 c.drawString(100, 710, "Content: Machine learning and AI research.")
 c.save()

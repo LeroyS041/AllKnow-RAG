@@ -9,11 +9,11 @@ on:
       - '.github/workflows/deploy-gke.yml'
 
 env:
-  PROJECT_ID: omniknow-v2
-  CLUSTER_NAME: omniknow-cluster
+  PROJECT_ID: AllKnow-v2
+  CLUSTER_NAME: AllKnow-cluster
   CLUSTER_REGION: us-central1
-  SERVICE_NAME: omniknow-backend
-  NAMESPACE: omniknow
+  SERVICE_NAME: AllKnow-backend
+  NAMESPACE: AllKnow
 
 jobs:
   deploy:
@@ -53,7 +53,7 @@ jobs:
     
     - name: Create/Update Kubernetes Secret
       run: |
-        kubectl create secret generic omniknow-secrets -n $NAMESPACE \
+        kubectl create secret generic AllKnow-secrets -n $NAMESPACE \
           --from-literal=GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} \
           --from-literal=PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }} \
           --from-literal=GOOGLE_SEARCH_API_KEY=${{ secrets.GOOGLE_SEARCH_API_KEY }} \

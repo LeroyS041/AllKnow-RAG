@@ -1,13 +1,13 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: omniknow-backend-hpa
-  namespace: omniknow
+  name: AllKnow-backend-hpa
+  namespace: AllKnow
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: omniknow-backend
+    name: AllKnow-backend
   minReplicas: 2
   maxReplicas: 10
   metrics:

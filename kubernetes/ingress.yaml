@@ -2,8 +2,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: omniknow-ingress
-  namespace: omniknow
+  name: AllKnow-ingress
+  namespace: AllKnow
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -12,16 +12,16 @@ metadata:
 spec:
   tls:
   - hosts:
-    - api.omniknow.my-domain.com  # Placeholder
-    secretName: omniknow-tls
+    - api.AllKnow.my-domain.com  # Placeholder
+    secretName: AllKnow-tls
   rules:
-  - host: api.omniknow.my-domain.com  # Placeholder
+  - host: api.AllKnow.my-domain.com  # Placeholder
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: omniknow-backend
+            name: AllKnow-backend
             port:
               number: 80

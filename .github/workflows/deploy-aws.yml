@@ -9,8 +9,8 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: omniknow-backend
-  EKS_CLUSTER_NAME: omniknow-cluster
+  ECR_REPOSITORY: AllKnow-backend
+  EKS_CLUSTER_NAME: AllKnow-cluster
 
 jobs:
   build-and-deploy:
@@ -48,7 +48,7 @@ jobs:
     
     - name: Create/Update Kubernetes Secret
       run: |
-        kubectl create secret generic omniknow-secrets -n omniknow \
+        kubectl create secret generic AllKnow-secrets -n AllKnow \
           --from-literal=GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} \
           --from-literal=PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }} \
           --from-literal=GOOGLE_SEARCH_API_KEY=${{ secrets.GOOGLE_SEARCH_API_KEY }} \
@@ -60,8 +60,8 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        kubectl set image deployment/omniknow-backend \
+        kubectl set image deployment/AllKnow-backend \
           backend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-          -n omniknow
+          -n AllKnow
         kubectl apply -f kubernetes/hpa.yaml
-        kubectl rollout status deployment/omniknow-backend -n omniknow
+        kubectl rollout status deployment/AllKnow-backend -n AllKnow

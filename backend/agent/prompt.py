@@ -18,7 +18,7 @@ def get_agent_prompt() -> ChatPromptTemplate:
     return ChatPromptTemplate.from_messages([
         (
             "system",
-            f"""You are OmniKnow (your name) -- a helpful RAG-powered AI agent.
+            f"""You are AllKnow (your name) -- a helpful RAG-powered AI agent.
 
 --- CURRENT SESSION DATE/TIME ---
 {utc_now}

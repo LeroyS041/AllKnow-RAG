@@ -1,4 +1,4 @@
-# 🤖 **OmniKnow RAG Agent**
+# 🤖 **AllKnow RAG Agent**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
@@ -12,7 +12,7 @@
 
 ## 🎯 Overview
 
-**OmniKnow** is an enterprise-ready RAG agent that combines **LangChain**, **FastAPI**, and **cloud-native infrastructure** to deliver intelligent document search and conversational AI capabilities. The system supports **local self-hosting** (Docker Compose) and **multi-cloud deployment** (AWS EKS, GCP Cloud Run/GKE) with **environment-adaptive vector storage** (ChromaDB for local, Pinecone for cloud) and **automated CI/CD pipelines**.
+**AllKnow** is an enterprise-ready RAG agent that combines **LangChain**, **FastAPI**, and **cloud-native infrastructure** to deliver intelligent document search and conversational AI capabilities. The system supports **local self-hosting** (Docker Compose) and **multi-cloud deployment** (AWS EKS, GCP Cloud Run/GKE) with **environment-adaptive vector storage** (ChromaDB for local, Pinecone for cloud) and **automated CI/CD pipelines**.
 
 ### Key Features
 
@@ -88,8 +88,8 @@
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/Sol-so-special/OmniKnow-RAG-Agent
-cd OmniKnow-RAG-Agent
+git clone https://github.com/LeroyS041/Custom-RAG
+cd Custom-RAG
 
 # 2. Configure environment
 cp .env.example .env
@@ -168,19 +168,19 @@ Executor: LangChain AgentExecutor with:
 
 ```bash
 # Prerequisites
-eksctl create cluster --name omniknow-cluster --region us-east-1
+eksctl create cluster --name AllKnow-cluster --region us-east-1
 
 # 1. Create S3 bucket
-aws s3 mb s3://omniknow-uploads --region us-east-1
+aws s3 mb s3://AllKnow-uploads --region us-east-1
 
 # 2. Update kubernetes/configmap.yaml with your bucket name
-# Change S3_BUCKET_NAME: "omniknow-uploads" to your actual bucket
+# Change S3_BUCKET_NAME: "AllKnow-uploads" to your actual bucket
 
 # 3. Deploy
 kubectl apply -f kubernetes/namespace.yaml
 
 # 4. Create secrets from your actual keys
-kubectl create secret generic omniknow-secrets -n omniknow \
+kubectl create secret generic AllKnow-secrets -n AllKnow \
   --from-literal=GEMINI_API_KEY=your-actual-key \
   --from-literal=PINECONE_API_KEY=your-actual-key \
   --from-literal=GOOGLE_SEARCH_API_KEY=your-actual-key \
@@ -192,7 +192,7 @@ kubectl apply -f kubernetes/backend-deployment.yaml
 kubectl apply -f kubernetes/backend-service.yaml
 
 # 6. Verify
-kubectl get pods -n omniknow
+kubectl get pods -n AllKnow
 ```
 
 **Infrastructure:**
@@ -206,9 +206,9 @@ kubectl get pods -n omniknow
 
 ```bash
 # Build and deploy
-gcloud builds submit --tag gcr.io/PROJECT_ID/omniknow-backend backend/
-gcloud run deploy omniknow-backend \
-  --image gcr.io/PROJECT_ID/omniknow-backend \
+gcloud builds submit --tag gcr.io/PROJECT_ID/AllKnow-backend backend/
+gcloud run deploy AllKnow-backend \
+  --image gcr.io/PROJECT_ID/AllKnow-backend \
   --region us-central1 \
   --platform managed \
   --allow-unauthenticated
@@ -224,10 +224,10 @@ gcloud run deploy omniknow-backend \
 
 ```bash
 # Create namespace
-kubectl create namespace omniknow
+kubectl create namespace AllKnow
 
 # Create secrets dynamically
-kubectl create secret generic omniknow-secrets -n omniknow \
+kubectl create secret generic AllKnow-secrets -n AllKnow \
   --from-literal=GEMINI_API_KEY=your-key \
   --from-literal=PINECONE_API_KEY=your-key \
   --from-literal=GOOGLE_SEARCH_API_KEY=your-key \
@@ -299,7 +299,7 @@ kubectl apply -f kubernetes-gcp/backend-service.yaml
 ## 📁 Project Structure (simplified)
 
 ```
-Omniknow-RAG-Agent/
+Custom-RAG/
 ├── backend/                  # FastAPI application
 │   ├── api/                  # REST API routes
 │   ├── agent/                # LangChain agent logic
@@ -419,7 +419,7 @@ curl -X POST http://localhost:8000/pdf/search \
 
 - **Architecture Diagram**: 
 <a id="full-architecture-diagram"></a>
-<img src="docs/architecture.png" alt="OmniKnow RAG Agent Architecture Diagram" width="800">
+<img src="docs/architecture.png" alt="AllKnow RAG Agent Architecture Diagram" width="800">
 
 - **Contributing Guidelines**: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
@@ -433,7 +433,7 @@ We welcome contributions! Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for gu
 
 ```bash
 # 1. Fork and clone
-git clone https://github.com/Sol-so-special/OmniKnow-RAG-Agent
+git clone https://github.com/LeroyS041/Custom-RAG
 
 # 2. Create feature branch
 git checkout -b feature/your-feature
@@ -483,7 +483,7 @@ This project is licensed under the **MIT License** - see the [`LICENSE`](LICENSE
 - **Cold Starts**: Cloud Run may experience ~1-2s latency on first request
 - **Concurrent Uploads**: File upload is synchronous (not optimized for high concurrency)
 
-For bug reports and feature requests, please [open an issue](https://github.com/Sol-so-special/OmniKnow-RAG-Agent/issues).
+For bug reports and feature requests, please [open an issue](https://github.com/LeroyS041/Custom-RAG/issues).
 
 ---
 

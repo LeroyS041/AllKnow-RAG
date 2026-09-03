@@ -2,7 +2,7 @@
 
 ## Overview
 
-**OmniKnow RAG Agent** is a production-ready RAG system that suports local hosting and multi-cloud deployment. This guide covers local development, AWS (EKS), and GCP (Cloud Run/GKE) deployments.
+**AllKnow RAG Agent** is a production-ready RAG system that suports local hosting and multi-cloud deployment. This guide covers local development, AWS (EKS), and GCP (Cloud Run/GKE) deployments.
 
 ---
 
@@ -30,8 +30,8 @@
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/Sol-so-special/OmniKnow-RAG-Agent
-cd OmniKnow-RAG-Agent
+git clone https://github.com/LeroyS041/Custom-RAG
+cd Custom-RAG
 ```
 
 ### 2. Configure Environment
@@ -92,7 +92,7 @@ brew install eksctl  # macOS
 
 ```bash
 eksctl create cluster \
-  --name omniknow-cluster \
+  --name AllKnow-cluster \
   --region us-east-1 \
   --nodegroup-name standard-workers \
   --node-type t3.medium \
@@ -102,14 +102,14 @@ eksctl create cluster \
 ### 2. Create S3 Bucket
 
 ```bash
-aws s3 mb s3://omniknow-uploads --region us-east-1
+aws s3 mb s3://AllKnow-uploads --region us-east-1
 ```
 
 ### 3. Create ECR Repository
 
 ```bash
 aws ecr create-repository \
-  --repository-name omniknow-backend \
+  --repository-name AllKnow-backend \
   --region us-east-1
 ```
 
@@ -128,7 +128,7 @@ S3_BUCKET_NAME: "your-bucket-name"  # Change if needed
 kubectl apply -f kubernetes/namespace.yaml
 
 # Create secrets dynamically (and NEVER commit secrets.yaml!)
-kubectl create secret generic omniknow-secrets -n omniknow \
+kubectl create secret generic AllKnow-secrets -n AllKnow \
   --from-literal=GEMINI_API_KEY=your-actual-gemini-key \
   --from-literal=PINECONE_API_KEY=your-actual-pinecone-key \
   --from-literal=GOOGLE_SEARCH_API_KEY=your-google-key \
@@ -143,9 +143,9 @@ kubectl apply -f kubernetes/backend-service.yaml
 ### 6. Verify Deployment
 
 ```bash
-kubectl get pods -n omniknow
-kubectl logs -f deployment/omniknow-backend -n omniknow
-kubectl get svc omniknow-backend -n omniknow
+kubectl get pods -n AllKnow
+kubectl logs -f deployment/AllKnow-backend -n AllKnow
+kubectl get svc AllKnow-backend -n AllKnow
 ```
 
 ---
@@ -167,7 +167,7 @@ kubectl get svc omniknow-backend -n omniknow
 
 # Authenticate
 gcloud auth login
-gcloud config set project omniknow-v2
+gcloud config set project AllKnow-v2
 ```
 
 ### 1. Enable APIs
@@ -185,20 +185,20 @@ gcloud services enable \
 cd backend
 
 # Build
-docker build -t gcr.io/omniknow-v2/omniknow-backend:latest .
+docker build -t gcr.io/AllKnow-v2/AllKnow-backend:latest .
 
 # Configure Docker for GCR
 gcloud auth configure-docker
 
 # Push
-docker push gcr.io/omniknow-v2/omniknow-backend:latest
+docker push gcr.io/AllKnow-v2/AllKnow-backend:latest
 ```
 
 ### 3. Deploy to Cloud Run
 
 ```bash
-gcloud run deploy omniknow-backend \
-  --image gcr.io/omniknow-v2/omniknow-backend:latest \
+gcloud run deploy AllKnow-backend \
+  --image gcr.io/AllKnow-v2/AllKnow-backend:latest \
   --region us-central1 \
   --platform managed \
   --allow-unauthenticated \
@@ -223,7 +223,7 @@ gcloud secrets add-iam-policy-binding gemini-key \
 
 ```bash
 # Get service URL
-gcloud run services describe omniknow-backend \
+gcloud run services describe AllKnow-backend \
   --region us-central1 \
   --format 'value(status.url)'
 
@@ -239,8 +239,8 @@ curl https://<SERVICE-URL>/health
 gcloud iam service-accounts create github-actions \
   --display-name "GitHub Actions"
 
-gcloud projects add-iam-policy-binding omniknow-v2 \
-  --member="serviceAccount:github-actions@omniknow-v2.iam.gserviceaccount.com" \
+gcloud projects add-iam-policy-binding AllKnow-v2 \
+  --member="serviceAccount:github-actions@AllKnow-v2.iam.gserviceaccount.com" \
   --role="roles/run.admin"
 ```
 
@@ -248,7 +248,7 @@ gcloud projects add-iam-policy-binding omniknow-v2 \
 
 ```bash
 gcloud iam service-accounts keys create key.json \
-  --iam-account github-actions@omniknow-v2.iam.gserviceaccount.com
+  --iam-account github-actions@AllKnow-v2.iam.gserviceaccount.com
 ```
 
 3. Add `GCP_SA_KEY` to GitHub Secrets (contents of `key.json`)
@@ -261,7 +261,7 @@ gcloud iam service-accounts keys create key.json \
 ### 1. Create GKE Cluster
 
 ```bash
-gcloud container clusters create omniknow-cluster \
+gcloud container clusters create AllKnow-cluster \
   --region us-central1 \
   --num-nodes 2 \
   --machine-type n1-standard-2
@@ -271,10 +271,10 @@ gcloud container clusters create omniknow-cluster \
 
 ```bash
 # Create namespace
-kubectl create namespace omniknow
+kubectl create namespace AllKnow
 
 # Create secrets dynamically
-kubectl create secret generic omniknow-secrets -n omniknow \
+kubectl create secret generic AllKnow-secrets -n AllKnow \
   --from-literal=GEMINI_API_KEY=your-key \
   --from-literal=PINECONE_API_KEY=your-key \
   --from-literal=GOOGLE_SEARCH_API_KEY=your-key \
@@ -308,7 +308,7 @@ ENVIRONMENT=production
 VECTOR_STORE_TYPE=pinecone
 PINECONE_API_KEY=<key>
 GEMINI_API_KEY=<key>
-S3_BUCKET_NAME=omniknow-uploads
+S3_BUCKET_NAME=AllKnow-uploads
 S3_REGION=us-east-1
 ```
 
@@ -319,7 +319,7 @@ ENVIRONMENT=production
 VECTOR_STORE_TYPE=pinecone
 PINECONE_API_KEY=<key>
 GEMINI_API_KEY=<key>
-GCS_BUCKET_NAME=omniknow-uploads-gcp
+GCS_BUCKET_NAME=AllKnow-uploads-gcp
 GCS_REGION=us-central1
 ```
 
@@ -340,8 +340,8 @@ docker-compose exec backend env | grep GEMINI_API_KEY
 ### Kubernetes Pod CrashLoopBackOff
 
 ```bash
-kubectl describe pod <pod-name> -n omniknow
-kubectl logs <pod-name> -n omniknow
+kubectl describe pod <pod-name> -n AllKnow
+kubectl logs <pod-name> -n AllKnow
 ```
 
 ### Cloud Run Cold Starts
@@ -389,8 +389,8 @@ The project uses a **Horizontal Pod Autoscaler (HPA)** that is applied automatic
 
 **View autoscaler status:**
 ```bash
-kubectl get hpa -n omniknow
-kubectl describe hpa omniknow-backend-hpa -n omniknow
+kubectl get hpa -n AllKnow
+kubectl describe hpa AllKnow-backend-hpa -n AllKnow
 ```
 
 **How it works:**
@@ -406,7 +406,7 @@ kubectl describe hpa omniknow-backend-hpa -n omniknow
 Cloud Run uses **serverless autoscaling** configured via deployment flags:
 
 ```bash
-gcloud run services update omniknow-backend \
+gcloud run services update AllKnow-backend \
   --region us-central1 \
   --min-instances 0 \
   --max-instances 10 \

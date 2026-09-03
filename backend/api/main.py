@@ -8,7 +8,7 @@ import logging
 
 # Create app
 app = FastAPI(
-    title="OmniKnow API",
+    title="AllKnow API",
     description="RAG-powered AI agent",
     version="2.0.0"
 )
@@ -18,12 +18,12 @@ async def startup_event():
     settings = get_settings()  # Setup
     setup_logging(settings.log_level, settings.log_file)
     logger = logging.getLogger(__name__)
-    logger.info(f"Starting OmniKnow API [Environment: {settings.environment}, Vector Store: {settings.vector_store_type}]")
+    logger.info(f"Starting AllKnow API [Environment: {settings.environment}, Vector Store: {settings.vector_store_type}]")
 
 @app.on_event("shutdown")
 async def shutdown_event():
     logger = logging.getLogger(__name__)
-    logger.info("Shutting down OmniKnow API")
+    logger.info("Shutting down AllKnow API")
 
 # CORS configuration
 settings = get_settings()

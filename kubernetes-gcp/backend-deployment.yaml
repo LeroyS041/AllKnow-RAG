@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: omniknow-backend
-  namespace: omniknow
+  name: AllKnow-backend
+  namespace: AllKnow
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: omniknow-backend
+      app: AllKnow-backend
   template:
     metadata:
       labels:
-        app: omniknow-backend
+        app: AllKnow-backend
     spec:
       containers:
       - name: backend
-        image: gcr.io/PLACEHOLDER-PROJECT_ID/omniknow-backend:latest
+        image: gcr.io/PLACEHOLDER-PROJECT_ID/AllKnow-backend:latest
         ports:
         - containerPort: 8000
         env:
@@ -28,32 +28,32 @@ spec:
         - name: CLOUD_PROVIDER
           valueFrom:
             configMapKeyRef:
-              name: omniknow-config
+              name: AllKnow-config
               key: CLOUD_PROVIDER
         - name: GCS_BUCKET_NAME
           valueFrom:
             configMapKeyRef:
-              name: omniknow-config
+              name: AllKnow-config
               key: GCS_BUCKET_NAME
         - name: PLACEHOLDER-GCS_PROJECT_ID
           valueFrom:
             configMapKeyRef:
-              name: omniknow-config
+              name: AllKnow-config
               key: PLACEHOLDER-GCS_PROJECT_ID
         - name: CORS_ORIGINS
           valueFrom:
             configMapKeyRef:
-              name: omniknow-config
+              name: AllKnow-config
               key: CORS_ORIGINS
         - name: GEMINI_API_KEY
           valueFrom:
             secretKeyRef:
-              name: omniknow-secrets
+              name: AllKnow-secrets
               key: GEMINI_API_KEY
         - name: PINECONE_API_KEY
           valueFrom:
             secretKeyRef:
-              name: omniknow-secrets
+              name: AllKnow-secrets
               key: PINECONE_API_KEY
         resources:
           requests:
